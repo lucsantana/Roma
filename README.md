@@ -45,7 +45,7 @@ Use Python 3.12+. See [development setup](docs/development.md) for Android and i
 
 Generated `.build/` projects and cached `.upstream/` sources are local outputs, not the source of truth for Roma changes.
 
-Read the [requirements](docs/requirements.md), [architecture](docs/architecture.md), [physical test plan](docs/testing.md), [contribution guide](CONTRIBUTING.md) and [third-party notices](THIRD_PARTY.md).
+Read the [requirements](docs/requirements.md), [architecture](docs/architecture.md), [roadmap and tracked tasks](docs/roadmap.md), [physical test plan](docs/testing.md), [contribution guide](CONTRIBUTING.md) and [third-party notices](THIRD_PARTY.md).
 
 ## Development language
 
