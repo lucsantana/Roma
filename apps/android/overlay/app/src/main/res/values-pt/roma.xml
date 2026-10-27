@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="roma_networks">Redes</string>
+    <string name="roma_bitchat_available">Bitchat: mensagens por proximidade e canais existentes estão disponíveis aqui.</string>
+    <string name="roma_meshtastic_pending">Meshtastic: mensagens por LoRa ainda não estão disponíveis nesta prévia.</string>
+    <string name="roma_preview_notice">Prévia de desenvolvimento. As mensagens usam identidades e configurações do Bitchat. Contatos ROMA e troca automática entre redes serão adicionados depois.</string>
+</resources>

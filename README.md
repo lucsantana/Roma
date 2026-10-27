@@ -16,7 +16,36 @@ LoRa is the radio technology; Meshtastic is the initial target networking ecosys
 
 ## Project status
 
-Roma is in the planning stage. The interoperability protocol, bridge implementation, supported hardware, and application architecture have not yet been implemented or validated. Cross-network delivery, identity mapping, and encryption behavior will be defined as part of the protocol design.
+Roma has an initial native BLE development integration for Android and iOS. It builds pinned Bitchat sources with a Roma shell and separate installation identifiers, preserving the upstream messaging engine. Source generation is tested; consult the CI results for native build status.
+
+This is not yet the complete Roma messenger. Physical BLE interoperability has not been validated by this integration. Roma-specific identity/history, the full interface, Meshtastic support and the BLE–LoRa bridge are not implemented. Cross-network delivery and encryption must not be assumed.
+
+## Get started
+
+```sh
+git clone https://github.com/lucsantana/Roma.git
+cd Roma
+python3 scripts/prepare.py all
+python3 -m unittest discover -s tests -v
+```
+
+Use Python 3.12+. See [development setup](docs/development.md) for Android and iPhone build/signing requirements. Network access is required to fetch the pinned sources and build dependencies.
+
+## Repository layout
+
+| Path | Purpose |
+| --- | --- |
+| `apps/android/overlay/` | Roma Kotlin/Compose additions |
+| `apps/ios/overlay/` | Roma SwiftUI additions |
+| `scripts/prepare.py` | Reproducible upstream source preparation and explicit integration changes |
+| `upstream.lock.json` | Exact upstream revisions |
+| `tests/` | Source integration and preparation safety checks |
+| `docs/` | Requirements, architecture, setup, roadmap and physical acceptance tests |
+| `.github/workflows/` | Android, iOS and integration checks |
+
+Generated `.build/` projects and cached `.upstream/` sources are local outputs, not the source of truth for Roma changes.
+
+Read the [requirements](docs/requirements.md), [architecture](docs/architecture.md), [physical test plan](docs/testing.md), [contribution guide](CONTRIBUTING.md) and [third-party notices](THIRD_PARTY.md).
 
 ## Development language
 

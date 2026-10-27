@@ -1,0 +1,15 @@
+{
+  "schema": 1,
+  "android": {
+    "repository": "https://github.com/permissionlesstech/bitchat-android.git",
+    "revision": "01294db3f097922f4ba148c1a7186d6776391bbd",
+    "cache": "bitchat-android",
+    "license_file": "LICENSE.md"
+  },
+  "ios": {
+    "repository": "https://github.com/permissionlesstech/bitchat.git",
+    "revision": "04995f68e470a18d1fc99f86fa326c2a87bab4f2",
+    "cache": "bitchat-apple",
+    "license_file": "LICENSE"
+  }
+}
