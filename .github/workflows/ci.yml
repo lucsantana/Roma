@@ -45,7 +45,7 @@ jobs:
           log-accepted-android-sdk-licenses: false
       - run: python scripts/prepare.py android
       - name: Install pinned Android SDK
-        run: sdkmanager 'platforms;android-37' 'build-tools;37.0.0'
+        run: sdkmanager 'platforms;android-37.0' 'build-tools;37.0.0'
       - name: Build and test
         working-directory: .build/android
         run: ./gradlew :app:assembleDebug :app:testDebugUnitTest --no-daemon

@@ -15,7 +15,7 @@ Edit `apps/*/overlay/` for Roma source additions and `scripts/prepare.py` for ex
 
 ## Android
 
-Use JDK 21, Android platform 37 and build tools 37.0.0, matching the pinned upstream catalog. Open `.build/android` in Android Studio or configure an SDK using `ANDROID_HOME`/local properties, then:
+Use JDK 21, Android platform API 37 (`platforms;android-37.0` in SDK Manager) and build tools 37.0.0, matching the pinned upstream catalog. Open `.build/android` in Android Studio or configure an SDK using `ANDROID_HOME`/local properties, then:
 
 ```sh
 cd .build/android
