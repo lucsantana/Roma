@@ -55,6 +55,10 @@ def configure_android(tree: Path) -> None:
             raise ValueError(f"Upstream download configuration changed: {filename}")
         path.write_text(text.replace("permissionlesstech/bitchat-android", "lucsantana/Roma")
                         .replace("bitchat-android-universal.apk", "roma-android-universal.apk"))
+    # Preserve the upstream download-contract assertions with Roma's intentional endpoint.
+    download_test = tree / "app/src/test/kotlin/com/bitchat/android/util/ApkDownloadSourceTest.kt"
+    replace_exact(download_test, "permissionlesstech/bitchat-android", "lucsantana/Roma", 2)
+    replace_exact(download_test, "bitchat-android-universal.apk", "roma-android-universal.apk")
 
 
 def configure_ios(tree: Path) -> None:
