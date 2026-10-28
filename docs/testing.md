@@ -1,6 +1,6 @@
 # Physical acceptance tests
 
-No physical BLE or LoRa test has been completed by this repository's initial integration. Compilation and unit tests cannot establish radio interoperability.
+Initial foreground BLE tests have been manually confirmed for Android–iPhone and iPhone–iPhone, including individual text delivery in both directions without internet. See the [BLE reference baseline](ble-baseline.md) for evidence scope and open cases. LoRa has not been tested. Compilation and unit tests cannot establish radio interoperability.
 
 ## Record for every run
 

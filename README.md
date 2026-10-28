@@ -18,7 +18,9 @@ LoRa is the radio technology; Meshtastic is the initial target networking ecosys
 
 Roma has an initial native BLE development integration for Android and iOS. It builds pinned Bitchat sources with a Roma shell and separate installation identifiers, preserving the upstream messaging engine. Source generation is tested; consult the CI results for native build status.
 
-This is not yet the complete Roma messenger. Physical BLE interoperability has not been validated by this integration. Roma-specific identity/history, the full interface, Meshtastic support and the BLE–LoRa bridge are not implemented. Cross-network delivery and encryption must not be assumed.
+The [BLE reference baseline](docs/ble-baseline.md), tagged `v0.1.0-ble-baseline`, records manually confirmed foreground discovery and bidirectional individual text messaging without internet, for Android–iPhone and iPhone–iPhone. Simultaneous Bluetooth power-cycle recovery remains a known limitation; full physical acceptance is still open.
+
+This is not yet the complete Roma messenger. Roma-specific identity/history, the full interface, Meshtastic support and the BLE–LoRa bridge are not implemented. Cross-network delivery and encryption must not be assumed.
 
 ## Get started
 
