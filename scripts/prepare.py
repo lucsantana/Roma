@@ -79,6 +79,9 @@ def configure_android_scan_recovery(tree: Path) -> None:
 
 def configure_android(tree: Path) -> None:
     configure_android_scan_recovery(tree)
+    # The upstream watch target shares the BLE client from the phone sources.
+    replace_exact(tree / "wear/build.gradle.kts", 'val sharedSourceIncludes = listOf(\n',
+                  'val sharedSourceIncludes = listOf(\n    "org/roma/messenger/BluetoothScanRecovery.kt",\n')
     replace_exact(tree / "app/build.gradle.kts", 'applicationId = "com.bitchat.droid"', f'applicationId = "{APP_ID}"')
     replace_exact(tree / "app/build.gradle.kts", 'versionName = "2.0.3"', 'versionName = "0.1.0-dev"')
     main = tree / "app/src/main"
