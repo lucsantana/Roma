@@ -80,7 +80,7 @@ class GeneratedSourceTests(unittest.TestCase):
             self.assertEqual(len(android_ids), 1)
             self.assertEqual(ios_ids, android_ids, "Every iOS build must discover the Android/public Bitchat BLE service")
 
-    def test_upstream_network_and_license_bytes_preserved_except_reviewed_integrations(self):
+    def test_upstream_network_and_license_bytes_preserved_except_discovery_selection(self):
         lock = json.loads((ROOT / "upstream.lock.json").read_text())
         prefixes = {
             "android": ("app/src/main/java/com/bitchat/android/mesh/", "app/src/main/java/com/bitchat/android/protocol/", "app/src/main/java/com/bitchat/android/noise/"),
@@ -96,15 +96,6 @@ class GeneratedSourceTests(unittest.TestCase):
             for name in names:
                 if name == entry["license_file"] or name.startswith(prefixes[platform]):
                     original = subprocess.check_output(["git", "show", f'{entry["revision"]}:{name}'], cwd=cache)
-                    if platform == "android" and name == "app/src/main/java/com/bitchat/android/mesh/BluetoothGattClientManager.kt":
-                        # The versioned, strict integration edits are the only allowed delta.
-                        # Kotlin broadcast tests exercise recovery behavior separately.
-                        with tempfile.TemporaryDirectory() as temporary:
-                            expected = Path(temporary) / name
-                            expected.parent.mkdir(parents=True)
-                            expected.write_bytes(original)
-                            prepare.configure_android_scan_recovery(Path(temporary))
-                            original = expected.read_bytes()
                     if platform == "ios" and name == "bitchat/Services/BLE/BLEService.swift":
                         # Only remove the upstream Debug/testnet selector. All other
                         # bytes, including packet handling and crypto, stay protected.

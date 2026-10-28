@@ -20,10 +20,6 @@ The generated iOS and Android builds must use the same public Bitchat BLE servic
 
 A second Android device is needed for physical Android-to-Android coverage; it does not block the cross-platform tests.
 
-### Adapter power-cycle recovery
-
-With both apps open and internet connections disabled, first confirm bidirectional individual messages. Toggle Bluetooth off and on on one phone, then repeat with both phones. Measure from the last radio becoming enabled to discovery and delivery of a new message in each direction. Repeat with each platform powered on first. Check a fast repeat cycle and that stopping the BLE client prevents automatic restart. Record delayed recovery separately from permanent failure; avoid inferring message delivery from the peer list alone.
-
 ## LoRa and bridge, after implementation and radio purchase
 
 First establish radio-to-radio communication with the original Meshtastic clients. Record both firmware versions, board revisions and compatible radio settings. Then test Roma-to-Roma and Roma-to-original-Meshtastic in both directions.

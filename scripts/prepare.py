@@ -31,54 +31,7 @@ def replace_exact(path: Path, old: str, new: str, count: int = 1) -> None:
     path.write_text(text.replace(old, new))
 
 
-def configure_android_scan_recovery(tree: Path) -> None:
-    client = tree / "app/src/main/java/com/bitchat/android/mesh/BluetoothGattClientManager.kt"
-    replace_exact(client, '    private val bleScanner: BluetoothLeScanner?',
-                  '    private var bleScanner: BluetoothLeScanner?')
-    replace_exact(client, '    private var isActive = false\n', '''    private var isActive = false
-
-    private val adapterRecovery = org.roma.messenger.BluetoothScanRecovery(
-        context.applicationContext,
-        suspendScan = {
-            scanDutyCycleJob?.cancel()
-            scanDutyCycleJob = null
-            stopScanWatchdog()
-            onScanStateChanged(false)
-            // Power loss invalidates the OS scan even when stopScan cannot run.
-            isCurrentlyScanning = false
-            scanCallback = null
-            bleScanner = null
-        },
-        resumeScan = {
-            if (isActive && bluetoothAdapter?.isEnabled == true && permissionManager.hasBluetoothPermissions()) {
-                bleScanner = bluetoothAdapter.bluetoothLeScanner
-                scanRetryCount = 0
-                lastScanResultTime = 0L
-                // Retain the upstream five-second start limit and power profile.
-                restartScanning()
-            }
-        }
-    )
-''')
-    replace_exact(client, '        if (bleScanner == null) {\n',
-                  '        bleScanner = bluetoothAdapter?.bluetoothLeScanner\n        if (bleScanner == null) {\n')
-    replace_exact(client, '        isActive = true\n',
-                  '        isActive = true\n        adapterRecovery.start()\n')
-    replace_exact(client, '    fun stop() {\n',
-                  '    fun stop() {\n        adapterRecovery.stop()\n')
-    replace_exact(client,
-                  '        if (!permissionManager.hasBluetoothPermissions() || bleScanner == null || !isActive || !enabled) return',
-                  '        val scanner = bleScanner ?: return\n'
-                  '        if (!permissionManager.hasBluetoothPermissions() || !isActive || !enabled ||\n'
-                  '            !scanningDesired || bluetoothAdapter?.isEnabled != true) return')
-    replace_exact(client, '            bleScanner.startScan(', '            scanner.startScan(')
-    replace_exact(client, '        if (!permissionManager.hasBluetoothPermissions() || bleScanner == null) return',
-                  '        val scanner = bleScanner ?: return\n        if (!permissionManager.hasBluetoothPermissions()) return')
-    replace_exact(client, '                    bleScanner.stopScan(it)', '                    scanner.stopScan(it)')
-
-
 def configure_android(tree: Path) -> None:
-    configure_android_scan_recovery(tree)
     replace_exact(tree / "app/build.gradle.kts", 'applicationId = "com.bitchat.droid"', f'applicationId = "{APP_ID}"')
     replace_exact(tree / "app/build.gradle.kts", 'versionName = "2.0.3"', 'versionName = "0.1.0-dev"')
     main = tree / "app/src/main"
