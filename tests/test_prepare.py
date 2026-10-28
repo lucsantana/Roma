@@ -3,6 +3,7 @@ import importlib.util
 import json
 from pathlib import Path
 import plistlib
+import re
 import subprocess
 import tempfile
 import unittest
@@ -69,7 +70,17 @@ class GeneratedSourceTests(unittest.TestCase):
         self.assertIn("bluetooth-central", plist["UIBackgroundModes"])
         self.assertIn("bluetooth-peripheral", plist["UIBackgroundModes"])
 
-    def test_upstream_network_and_license_bytes_are_unchanged(self):
+    def test_ble_gatt_identifiers_match_across_platforms_and_build_modes(self):
+        android = (ROOT / ".build/android/app/src/main/java/com/bitchat/android/util/AppConstants.kt").read_text()
+        ios = (ROOT / ".build/ios/bitchat/Services/BLE/BLEService.swift").read_text()
+        for android_name, ios_name in (("SERVICE_UUID", "serviceUUID"),
+                                       ("CHARACTERISTIC_UUID", "characteristicUUID")):
+            android_ids = re.findall(rf'{android_name}: UUID = UUID.fromString\("([A-F0-9-]+)"\)', android)
+            ios_ids = re.findall(rf'static let {ios_name} = CBUUID\(string: "([A-F0-9-]+)"\)', ios)
+            self.assertEqual(len(android_ids), 1)
+            self.assertEqual(ios_ids, android_ids, "Every iOS build must discover the Android/public Bitchat BLE service")
+
+    def test_upstream_network_and_license_bytes_preserved_except_discovery_selection(self):
         lock = json.loads((ROOT / "upstream.lock.json").read_text())
         prefixes = {
             "android": ("app/src/main/java/com/bitchat/android/mesh/", "app/src/main/java/com/bitchat/android/protocol/", "app/src/main/java/com/bitchat/android/noise/"),
@@ -85,6 +96,17 @@ class GeneratedSourceTests(unittest.TestCase):
             for name in names:
                 if name == entry["license_file"] or name.startswith(prefixes[platform]):
                     original = subprocess.check_output(["git", "show", f'{entry["revision"]}:{name}'], cwd=cache)
+                    if platform == "ios" and name == "bitchat/Services/BLE/BLEService.swift":
+                        # Only remove the upstream Debug/testnet selector. All other
+                        # bytes, including packet handling and crypto, stay protected.
+                        selector = re.compile(
+                            rb'    #if DEBUG\n'
+                            rb'    static let serviceUUID = CBUUID\(string: "F47B5E2D-4A9E-4C5A-9B3F-8E1D2C3A4B5A"\) // testnet\n'
+                            rb'    #else\n'
+                            rb'(    static let serviceUUID = CBUUID\(string: "F47B5E2D-4A9E-4C5A-9B3F-8E1D2C3A4B5C"\) // mainnet\n)'
+                            rb'    #endif\n')
+                        original, count = selector.subn(rb'\1', original)
+                        self.assertEqual(count, 1, "Review upstream discovery changes explicitly")
                     self.assertEqual((tree / name).read_bytes(), original, f"Unexpected protocol/license change: {platform}/{name}")
                     checked += 1
             self.assertGreater(checked, 10, "A source layout change requires reviewing the protected paths")

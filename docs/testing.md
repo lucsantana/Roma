@@ -8,6 +8,8 @@ Record Roma commit, upstream lock revision, generated-source manifest, phone mod
 
 ## BLE baseline
 
+The generated iOS and Android builds must use the same public Bitchat BLE service UUID, including Debug builds. The source integration test checks this contract. An unmodified upstream iOS Debug build uses a separate testnet and is not a valid public-network interoperability endpoint.
+
 1. Install the development build on one Android phone and one iPhone. Keep Bluetooth on; disable cellular data and Wi-Fi.
 2. Complete the upstream onboarding and grant needed Bluetooth permissions.
 3. Discover each peer and exchange individual text messages in both directions.

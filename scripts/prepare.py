@@ -61,7 +61,20 @@ def configure_android(tree: Path) -> None:
     replace_exact(download_test, "bitchat-android-universal.apk", "roma-android-universal.apk")
 
 
+def configure_ios_ble_discovery(tree: Path) -> None:
+    # Android uses the public Bitchat service in both Debug and Release.
+    # Upstream iOS Debug selects an isolated testnet and cannot discover it.
+    replace_exact(tree / "bitchat/Services/BLE/BLEService.swift",
+                  '    #if DEBUG\n'
+                  '    static let serviceUUID = CBUUID(string: "F47B5E2D-4A9E-4C5A-9B3F-8E1D2C3A4B5A") // testnet\n'
+                  '    #else\n'
+                  '    static let serviceUUID = CBUUID(string: "F47B5E2D-4A9E-4C5A-9B3F-8E1D2C3A4B5C") // mainnet\n'
+                  '    #endif\n',
+                  '    static let serviceUUID = CBUUID(string: "F47B5E2D-4A9E-4C5A-9B3F-8E1D2C3A4B5C") // mainnet\n')
+
+
 def configure_ios(tree: Path) -> None:
+    configure_ios_ble_discovery(tree)
     replace_exact(tree / "bitchat/BitchatApp.swift", "            ContentView()",
                   "            RomaRootView { ContentView() }")
     config = tree / "Configs/Release.xcconfig"
