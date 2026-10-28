@@ -24,6 +24,8 @@ cd .build/android
 
 The application ID is `org.roma.messenger.dev`, separate from the original Bitchat installation. Internal upstream package names remain unchanged for maintainability. APK download endpoints point to Roma; no signed Roma release channel is established by this development build. Debug APKs are not production releases.
 
+The BLE client observes adapter power transitions while active. Power-off clears its stale scan state and stops discovery timers; power-on reacquires the scanner and reapplies the existing scan profile with the upstream start-rate limit. This avoids relying only on the 30-second watchdog and 120-second stale-result threshold after a radio power cycle. The observer is removed when the client stops, and respects disabled client/transport settings. Physical recovery timing still needs measurement; this does not promise uninterrupted background delivery.
+
 ## iPhone
 
 Open Xcode and complete its license/first-launch setup. Select the complete Xcode developer directory for command-line builds, or set `DEVELOPER_DIR` for individual commands. Open `.build/ios/bitchat.xcodeproj`, select the `bitchat (iOS)` scheme and build.
@@ -43,6 +45,6 @@ For a physical iPhone, copy the generated `Configs/Local.xcconfig.example` to `C
 
 Roma uses the public Bitchat BLE service UUID in both Debug and Release on both platforms. Pinned upstream iOS selects a separate testnet UUID in Debug, whereas Android always uses the public UUID. Preparation removes only that iOS selector so development builds can discover Android and public Bitchat peers. Debug diagnostics remain enabled; packet handling and cryptography are unchanged. This does not establish message-level interoperability, which still requires physical tests.
 
-CI checks generation, matching BLE service/characteristic identifiers, protected upstream networking/license files (with only the documented iOS discovery selector exception), Android compilation/unit tests and iOS simulator compilation. Consult the actual run results; the presence of a workflow is not a passing build.
+CI checks generation, matching BLE service/characteristic identifiers, protected upstream networking/license files (with only the documented iOS discovery selector and Android scan-recovery integration exceptions), Android compilation/unit tests and iOS simulator compilation. Android broadcast tests cover power cycles, duplicate events and observer teardown. Consult the actual run results; the presence of a workflow is not a passing build.
 
 For physical validation use [testing.md](testing.md). The first integration retains Bitchat behavior under a Roma shell; the full [requirements](requirements.md) remain the product target.
