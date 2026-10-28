@@ -69,7 +69,7 @@ fun RomaRoot(viewModel: ChatViewModel, content: @Composable () -> Unit) {
     BackHandler(workspace && activeSheet == null && selectedPeer == null) { workspace = false }
 
     MaterialTheme(colorScheme = colors, typography = Typography()) {
-        Column(Modifier.fillMaxSize().background(colors.background)) {
+        Column(Modifier.fillMaxSize().background(colors.background).statusBarsPadding()) {
             if (workspace) {
                 Row(Modifier.fillMaxWidth().background(colors.surface).padding(horizontal = 8.dp), verticalAlignment = Alignment.CenterVertically) {
                     IconButton(onClick = { workspace = false; returnToInbox = false }) {
