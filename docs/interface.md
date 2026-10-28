@@ -18,6 +18,12 @@ Android reads the existing conversation `StateFlow` and opens the native private
 
 Runtime and mesh ownership remain with the existing activity and `AppRuntime`. Opening a network section does not create a second transport session. The native Bitchat workspace is shown when its features or a conversation are requested. This change does not modify BLE discovery, connection recovery, cryptography, message routing or persistent account identity.
 
+## Validation status
+
+Revision `27631ff` passed source integration checks, Android debug compilation and unit tests, and the iOS simulator build in [CI](https://github.com/lucsantana/Roma/actions/runs/40630762191). A signed iOS device build also succeeded. The Android development package was signed with the existing local development key; signature verification passed and its code/resources match the CI artifact.
+
+Synthetic SwiftUI layout previews were reviewed for the populated inbox in light/dark appearance and the Meshtastic placeholder. These use fixture data and a desktop rendering host; they are not physical-phone screenshots or interactive acceptance results. Android visual review, native navigation, larger text, notifications and post-update BLE messaging remain pending. Installation and physical testing were deferred; the existing device installations have not been changed by this UI work.
+
 ## UI acceptance checklist
 
 - Check empty and populated inboxes, long names, unread changes and offline retained conversations.
