@@ -6,12 +6,13 @@ The application source matches `d56a3db` / `127c826`. Android retains its pinned
 
 ## Confirmed scope
 
-These results were manually reported by the tester; they are not instrumented radio measurements. The latest confirmation covers the restored baseline and adding a third phone to test both platform pairings.
+These results were manually reported by the tester; they are not instrumented radio measurements. The latest confirmation covers the restored baseline and a third phone running the original Bitchat iOS client. The tester clarified the third phone’s client after the reference tag was published; this report records that clarification without moving the tag.
 
 | Scenario | Result | Conditions |
 | --- | --- | --- |
-| Android ↔ iPhone discovery and individual text | Confirmed in both directions | Both apps open; Bluetooth on; Wi-Fi and cellular data off |
-| iPhone ↔ iPhone discovery and individual text | Confirmed in both directions | Same foreground, offline conditions |
+| Roma Android ↔ Roma iOS discovery and individual text | Confirmed in both directions | Both apps open; Bluetooth on; Wi-Fi and cellular data off |
+| Roma Android ↔ original Bitchat iOS individual text | Confirmed in both directions | Same foreground, offline conditions |
+| Roma iOS ↔ original Bitchat iOS individual text | Confirmed in both directions | Same foreground, offline conditions |
 
 Device inventories, identifiers, message content and raw logs remain local. Exact per-device OS/build and app-revision records are incomplete, so these results do not establish compatibility with every supported model or OS version. Three phones in the test set do not by themselves prove multi-hop relaying.
 
@@ -20,7 +21,8 @@ Device inventories, identifiers, message content and raw logs remain local. Exac
 - Recovery when both phones turn Bluetooth off and back on remains delayed or unreliable. Do not mark reconnect acceptance complete.
 - Single-phone power-cycle recovery was reported working before the latest baseline confirmation; repeat it as part of systematic regression coverage.
 - Locked screen, background operation, restart, duplicate handling, Android–Android and controlled multi-hop delivery remain unvalidated.
-- Compatibility with original Bitchat clients and the full upstream feature inventory remain to be checked.
+- Roma iOS ↔ Roma iOS remains unvalidated: the second iPhone ran original Bitchat, not Roma.
+- Original Bitchat Android compatibility and the full upstream feature inventory remain to be checked. The confirmed original-client scope is individual text with Bitchat iOS; exact app versions still need recording.
 - Meshtastic, LoRa delivery and the BLE–LoRa bridge are not implemented or validated by this checkpoint.
 
 Source integration, Android compilation/unit tests and iOS simulator compilation passed for the identical application source in [this workflow](https://github.com/lucsantana/Roma/actions/runs/40611360464). Compilation is separate from the manual checks above.

@@ -1,6 +1,6 @@
 # Roadmap and implementation status
 
-The initial source integration adds native Roma development shells around pinned Bitchat applications. Seven preparation checks pass locally; native builds and tests have also passed for the reference source tree. The [BLE reference baseline](ble-baseline.md) records initial manual foreground Android–iPhone and iPhone–iPhone messaging validation. Full physical acceptance remains open; consult the pull request checks and outstanding cases.
+The initial source integration adds native Roma development shells around pinned Bitchat applications. Seven preparation checks pass locally; native builds and tests have also passed for the reference source tree. The [BLE reference baseline](ble-baseline.md) records initial manual foreground Roma Android ↔ Roma iOS messaging and interoperability of both Roma platforms with original Bitchat iOS. Roma iOS ↔ Roma iOS is still unvalidated. Full physical acceptance remains open; consult the pull request checks and outstanding cases.
 
 | Workstream | Tracking | Completion condition |
 | --- | --- | --- |

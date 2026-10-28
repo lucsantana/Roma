@@ -1,6 +1,6 @@
 # Physical acceptance tests
 
-Initial foreground BLE tests have been manually confirmed for Android–iPhone and iPhone–iPhone, including individual text delivery in both directions without internet. See the [BLE reference baseline](ble-baseline.md) for evidence scope and open cases. LoRa has not been tested. Compilation and unit tests cannot establish radio interoperability.
+Initial foreground BLE tests have been manually confirmed for Roma Android ↔ Roma iOS, Roma Android ↔ original Bitchat iOS, and Roma iOS ↔ original Bitchat iOS, including individual text delivery in both directions without internet. Roma iOS ↔ Roma iOS is still unvalidated. See the [BLE reference baseline](ble-baseline.md) for evidence scope and open cases. LoRa has not been tested. Compilation and unit tests cannot establish radio interoperability.
 
 ## Record for every run
 
