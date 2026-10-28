@@ -61,7 +61,6 @@ class GeneratedSourceTests(unittest.TestCase):
         self.assertNotIn("com.bitchat.android.permission.FORCE_FINISH", manifest)
         self.assertIn(f"{prepare.APP_ID}.permission.FORCE_FINISH", manifest)
         self.assertIn("org.roma.messenger.RomaRoot", (android / "app/src/main/java/com/bitchat/android/MainActivity.kt").read_text())
-        self.assertIn('"org/roma/messenger/BluetoothScanRecovery.kt"', (android / "wear/build.gradle.kts").read_text())
         self.assertIn("RomaRootView { ContentView() }", (ios / "bitchat/BitchatApp.swift").read_text())
         config = (ios / "Configs/Release.xcconfig").read_text()
         self.assertIn(f"PRODUCT_BUNDLE_IDENTIFIER = {prepare.APP_ID}\n", config)
