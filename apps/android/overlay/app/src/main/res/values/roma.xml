@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="roma_networks">Networks</string>
+    <string name="roma_bitchat_available">Bitchat: nearby messaging and existing channels are available here.</string>
+    <string name="roma_meshtastic_pending">Meshtastic: LoRa messaging is not available in this preview.</string>
+    <string name="roma_preview_notice">Development preview. Messages use Bitchat identities and settings. Roma contacts and automatic switching between networks are coming later.</string>
+</resources>

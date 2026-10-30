@@ -1,0 +1,16 @@
+.upstream/
+.build/
+.tools/
+.gradle/
+local.properties
+.DS_Store
+__pycache__/
+*.pyc
+*.xcuserstate
+xcuserdata/
+*.keystore
+*.jks
+*.p12
+*.mobileprovision
+.env
+
