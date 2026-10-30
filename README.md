@@ -49,9 +49,23 @@ Generated `.build/` projects and cached `.upstream/` sources are local outputs, 
 
 Read the [requirements](docs/requirements.md), [architecture](docs/architecture.md), [roadmap and tracked tasks](docs/roadmap.md), [physical test plan](docs/testing.md), [contribution guide](CONTRIBUTING.md) and [third-party notices](THIRD_PARTY.md).
 
-## Development language
+## Architecture decisions
 
-**English is the default language for development.** Use English for source code identifiers, code comments, documentation, issues, pull requests, and commit messages. User-facing translations are welcome as the project evolves.
+The initial architecture follows a native, offline-first approach. These decisions define the intended implementation direction; they do not describe completed functionality.
+
+| Area | Decision |
+| --- | --- |
+| Android application | Native Android application written in **Kotlin**. |
+| iOS application | Native iOS application written in **Swift**. |
+| Mobile implementation | Separate native applications with direct access to each platform's Bluetooth APIs, permissions, lifecycle, and background execution capabilities. |
+| Protocol interoperability | A shared, platform-independent Roma protocol specification with common message formats and compatibility test vectors for both native implementations. |
+| Network integration | Separate adapters for Bitchat interoperability and compatible LoRa / Meshtastic devices, keeping transport-specific behavior separate from application logic. |
+| Offline operation | Core messaging is designed to operate without cellular service, internet access, or a mandatory cloud backend. Delivery still depends on powered devices and reachable peers or radio links. |
+| LoRa hardware | Use compatible external LoRa / Meshtastic radios. The mobile application does not replace the radio hardware. |
+
+Native applications are chosen to give each platform explicit control over device integration and operating-system behavior. Background communication remains subject to Android and iOS restrictions and must be tested on real devices.
+
+Bridge placement, message routing, duplicate suppression, persistence, identity mapping, cross-network encryption, and supported hardware remain open design topics. They will be documented and validated through public architectural proposals before implementation. No end-to-end privacy guarantee across the bridge is claimed at this stage.
 
 ## Community
 
