@@ -1,7 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="roma_networks">Redes</string>
-    <string name="roma_bitchat_available">Bitchat: mensagens por proximidade e canais existentes estão disponíveis aqui.</string>
-    <string name="roma_meshtastic_pending">Meshtastic: mensagens por LoRa ainda não estão disponíveis nesta prévia.</string>
-    <string name="roma_preview_notice">Prévia de desenvolvimento. As mensagens usam identidades e configurações do Bitchat. Contatos ROMA e troca automática entre redes serão adicionados depois.</string>
+    <string name="roma_back">Conversas</string>
+    <string name="roma_network_space">Canais e funções da rede</string>
+    <string name="roma_all_networks">Todas as suas conversas, em um só lugar</string>
+    <string name="roma_bluetooth_network">Conversas, canais e pessoas próximas</string>
+    <string name="roma_lora_network">Comunicação por rádio LoRa</string>
+    <string name="roma_new_conversation">Nova conversa</string>
+    <string name="roma_lora_title">Mais longe, por rádio</string>
+    <string name="roma_lora_description">Suas conversas Meshtastic terão um espaço próprio aqui. A conexão com rádios ainda não está disponível.</string>
+    <string name="roma_coming_soon">Em breve</string>
+    <string name="roma_search">Buscar conversas</string>
+    <string name="roma_clear_search">Limpar busca</string>
+    <string name="roma_all">Todas</string>
+    <string name="roma_unread">Não lidas</string>
+    <string name="roma_nearby">Pessoas próximas</string>
+    <string name="roma_nearby_count">%1$d disponíveis no Bitchat</string>
+    <string name="roma_open_bitchat">Abrir canais e funções do Bitchat</string>
+    <string name="roma_conversations">Conversas</string>
+    <string name="roma_no_results">Nenhuma conversa encontrada</string>
+    <string name="roma_no_chats">Sua próxima conversa começa aqui</string>
+    <string name="roma_try_search">Tente outro nome ou veja todas as conversas.</string>
+    <string name="roma_start_nearby">Encontre alguém por perto e comece a conversar, mesmo sem internet.</string>
+    <string name="roma_nearby_hint">Pessoas encontradas pelo Bitchat. Mantenha o Bluetooth ligado.</string>
+    <string name="roma_no_peers">Ninguém por perto ainda. Abra o ROMA ou Bitchat em outro aparelho próximo.</string>
+    <string name="roma_person">Pessoa próxima</string>
+    <string name="roma_available">Disponível para conversar</string>
+    <string name="roma_done">Concluir</string>
+    <string name="roma_attachment">Anexo</string>
+    <string name="roma_group">Grupo</string>
 </resources>

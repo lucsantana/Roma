@@ -20,7 +20,9 @@ Roma has an initial native BLE development integration for Android and iOS. It b
 
 The [BLE reference baseline](docs/ble-baseline.md), tagged `v0.1.0-ble-baseline`, records manually confirmed foreground discovery and bidirectional individual text messaging without internet, for Roma Android ↔ Roma iOS and for each Roma platform ↔ original Bitchat iOS. Simultaneous Bluetooth power-cycle recovery remains a known limitation; full physical acceptance is still open.
 
-This is not yet the complete Roma messenger. Roma-specific identity/history, the full interface, Meshtastic support and the BLE–LoRa bridge are not implemented. Cross-network delivery and encryption must not be assumed.
+The [network interface](docs/interface.md) adds a unified ROMA inbox with source labels, search, unread filters and separate Bitchat and Meshtastic sections on Android and iOS. Bitchat conversations and features use the existing native workspace; Meshtastic is explicitly unavailable. Physical acceptance of this interface is pending.
+
+This is not yet the complete Roma messenger. Roma-specific identity/history, a fully redesigned conversation screen, Meshtastic support and the BLE–LoRa bridge are not implemented. Cross-network delivery and encryption must not be assumed.
 
 ## Get started
 

@@ -37,7 +37,7 @@ def configure_android(tree: Path) -> None:
     main = tree / "app/src/main"
     replace_exact(main / "java/com/bitchat/android/MainActivity.kt",
                   "ChatScreen(viewModel = chatViewModel)",
-                  "org.roma.messenger.RomaRoot { ChatScreen(viewModel = chatViewModel) }")
+                  "org.roma.messenger.RomaRoot(viewModel = chatViewModel) { ChatScreen(viewModel = chatViewModel) }")
     for path in (main / "res").glob("values*/strings.xml"):
         text = path.read_text()
         text = re.sub(r'(<string name="app_name"[^>]*>).*?(</string>)', r'\g<1>ROMA Dev\2', text)
@@ -76,7 +76,11 @@ def configure_ios_ble_discovery(tree: Path) -> None:
 def configure_ios(tree: Path) -> None:
     configure_ios_ble_discovery(tree)
     replace_exact(tree / "bitchat/BitchatApp.swift", "            ContentView()",
-                  "            RomaRootView { ContentView() }")
+                  "            RomaRootView(runtime: runtime) { ContentView() }")
+    replace_exact(tree / "bitchat/BitchatApp.swift", "private var appThemeRawValue = AppTheme.matrix.rawValue",
+                  "private var appThemeRawValue = AppTheme.liquidGlass.rawValue")
+    replace_exact(tree / "bitchat/BitchatApp.swift", "AppTheme(rawValue: appThemeRawValue) ?? .matrix",
+                  "AppTheme(rawValue: appThemeRawValue) ?? .liquidGlass")
     config = tree / "Configs/Release.xcconfig"
     replace_exact(config, "PRODUCT_BUNDLE_IDENTIFIER = chat.bitchat", f"PRODUCT_BUNDLE_IDENTIFIER = {APP_ID}")
     replace_exact(config, "APP_GROUP_ID = group.chat.bitchat", f"APP_GROUP_ID = group.{APP_ID}")
